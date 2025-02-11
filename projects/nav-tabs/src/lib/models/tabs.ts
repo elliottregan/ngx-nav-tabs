@@ -15,5 +15,6 @@ export interface TabbableRoute<T extends TabLabelCopy<string> | void = void>
         label: string;
         order: number;
       };
+    [key: string]: any;
   };
 }
