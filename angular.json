@@ -58,6 +58,7 @@
             ],
             "tsConfig": "projects/nav-tabs-demo/tsconfig.app.json",
             "assets": [
+              "projects/nav-tabs-demo/src/_redirects",
               "projects/nav-tabs-demo/src/favicon.ico",
               "projects/nav-tabs-demo/src/assets"
             ],

@@ -53,9 +53,7 @@ export class NavTabsComponent<TKeys extends string = string> implements OnChange
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['routes']) {
-      console.log(this.sortedRoutes);
       this.sortRoutes();
-      console.log(this.sortedRoutes);
     }
   }
 
