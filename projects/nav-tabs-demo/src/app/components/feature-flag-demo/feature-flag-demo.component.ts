@@ -5,12 +5,12 @@ import { NavTabsComponent } from 'nav-tabs';
 import { TabbableRoute } from 'nav-tabs';
 import { RouteDataComponent } from '../route-data/route-data.component';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-feature-flag-demo',
   standalone: true,
-  imports: [CommonModule, NavTabsComponent, FormsModule],
+  imports: [CommonModule, NavTabsComponent, FormsModule, RouterOutlet],
   template: `
     <section class="feature-flag-demo">
       <h2>Feature Flag Demo</h2>
@@ -19,9 +19,9 @@ import { Router } from '@angular/router';
         <div *ngFor="let feature of availableFeatures" class="toggle-item">
           <label class="toggle-label">
             <input
-              type="checkbox"
-              [checked]="isFeatureEnabled(feature)"
-              (change)="toggleFeature(feature)" />
+                type="checkbox"
+                [checked]="isFeatureEnabled(feature)"
+                (change)="toggleFeature(feature)" />
             {{ feature.data.tabData.label }}
           </label>
         </div>
@@ -29,6 +29,7 @@ import { Router } from '@angular/router';
 
       <article class="demo-section">
         <lib-nav-tabs [routes]="visibleRoutes"></lib-nav-tabs>
+        <router-outlet></router-outlet>
       </article>
     </section>
   `,
@@ -107,15 +108,18 @@ export class FeatureFlagDemoComponent {
   isFeatureEnabled(feature: TabbableRoute): boolean {
     return this.visibleRoutes.some((route) => route.path === feature.path);
   }
-
   toggleFeature(feature: TabbableRoute): void {
     if (this.isFeatureEnabled(feature)) {
       this.visibleRoutes = this.visibleRoutes.filter(
-        (route) => route.path !== feature.path,
+          (route) => route.path !== feature.path
       );
     } else {
       this.visibleRoutes = [...this.visibleRoutes, feature];
     }
-    this.router.resetConfig(this.visibleRoutes);
+
+    // Navigate to the first available route if the current route is removed
+    if (this.visibleRoutes.length > 0) {
+      this.router.navigate(['/feature-flags', this.visibleRoutes[0].path]);
+    }
   }
 }

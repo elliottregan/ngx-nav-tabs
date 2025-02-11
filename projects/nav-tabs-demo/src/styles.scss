@@ -1,1 +1,94 @@
-/* Add application styles & imports to this file! */
+// styles.scss (at the root of your project)
+
+/* Base font and color settings */
+:root {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Reset and base styles */
+html {
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-size: 16px;
+  color: #1a1a1a;
+  background-color: #ffffff;
+}
+
+/* Typography scale */
+h1 {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.875rem;
+  line-height: 1.3;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Link styles */
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* List styles */
+ul, ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin: 0.5rem 0;
+}
+
+/* Nice article/section spacing */
+article, section {
+  margin: 2rem 0;
+}
+
+/* Content width and readability */
+.content {
+  max-width: 65ch;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Adjustments for larger screens */
+@media (min-width: 768px) {
+  html {
+    font-size: 18px;
+  }
+
+  .content {
+    max-width: 80ch;
+    padding: 0 2rem;
+  }
+}

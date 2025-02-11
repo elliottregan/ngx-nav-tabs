@@ -40,14 +40,6 @@ import { CommonModule } from '@angular/common';
     .data-container {
       margin-top: 1rem;
     }
-    .data-item {
-      padding: 0.5rem;
-      margin: 0;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .data-item:last-child {
-      border-bottom: none;
-    }
     pre {
       white-space: normal;
     }

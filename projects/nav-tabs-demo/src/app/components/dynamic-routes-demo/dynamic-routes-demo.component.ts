@@ -1,25 +1,26 @@
 // dynamic-routes-demo.component.ts
-import { Component, inject } from '@angular/core';
+import {Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import { NavTabsComponent, TabbableRoute } from 'nav-tabs';
 import { RouteFormComponent, RouteFormData } from '../route-form/route-form.component';
 import { RouteDataComponent } from '../route-data/route-data.component';
 import { AppTabsCopyModel } from '../../models/copy';
-import { tabbableRoutes, translatedRoutes } from '../../app.routes';
+import { DynamicRoutesService } from "../../services/dynamic-routes.service";
 
 @Component({
   selector: 'app-dynamic-routes-demo',
   standalone: true,
-  imports: [CommonModule, NavTabsComponent, RouteFormComponent],
+  imports: [CommonModule, NavTabsComponent, RouteFormComponent, RouterOutlet],
   template: `
     <section class="dynamic-routes-demo">
+      <h2>Dynamic Routes</h2>
       <app-route-form (routeAdded)="addRoute($event)"></app-route-form>
 
       <section class="route-list">
-        <h3>Dynamic Routes</h3>
-        <div *ngFor="let route of dynamicRoutes" class="route-item">
-          <span>{{ route.data.tabData.label }} (/{{ route.path }})</span>
+        <h3>Created Routes</h3>
+        <div *ngFor="let route of visibleRoutes()" class="route-item">
+          <span>{{ route.data.tabData.label }} <em>/{{ route.path }}</em></span>
           <button (click)="removeRoute(route)" class="button delete">
             Remove
           </button>
@@ -27,8 +28,8 @@ import { tabbableRoutes, translatedRoutes } from '../../app.routes';
       </section>
 
       <article>
-        <h2>Dynamic Routes Demo</h2>
-        <lib-nav-tabs [routes]="visibleRoutes"></lib-nav-tabs>
+        <lib-nav-tabs [routes]="visibleRoutes()"></lib-nav-tabs>
+        <router-outlet></router-outlet>
       </article>
     </section>
   `,
@@ -67,22 +68,13 @@ import { tabbableRoutes, translatedRoutes } from '../../app.routes';
 })
 export class DynamicRoutesDemoComponent {
   private router = inject(Router);
-  private baseRoutes: TabbableRoute[] = tabbableRoutes;
-  private translatedRoutes: TabbableRoute<AppTabsCopyModel>[] =
-    translatedRoutes;
-  dynamicRoutes: (TabbableRoute | TabbableRoute<AppTabsCopyModel>)[] = [];
+  private routesService = inject(DynamicRoutesService);
 
-  get visibleRoutes(): (TabbableRoute | TabbableRoute<AppTabsCopyModel>)[] {
-    return [
-      ...this.baseRoutes,
-      ...this.translatedRoutes,
-      ...this.dynamicRoutes,
-    ];
-  }
+  visibleRoutes = this.routesService.getRoutes();
 
   addRoute(formData: RouteFormData) {
     const route = formData.translationKey
-      ? {
+        ? {
           path: formData.path,
           component: RouteDataComponent,
           data: {
@@ -93,24 +85,33 @@ export class DynamicRoutesDemoComponent {
             },
           },
         }
-      : {
+        : {
           path: formData.path,
           component: RouteDataComponent,
-          data: { tabData: { label: formData.label, order: formData.order, } },
+          data: { tabData: { label: formData.label, order: formData.order } },
         };
 
-    this.dynamicRoutes.push(route);
+    this.routesService.addRoute(route);
     this.updateRouterConfig();
   }
 
-  removeRoute(routeToRemove: TabbableRoute | TabbableRoute<AppTabsCopyModel>) {
-    this.dynamicRoutes = this.dynamicRoutes.filter(
-      (route) => route.path !== routeToRemove.path,
-    );
+  removeRoute(route: (TabbableRoute | TabbableRoute<AppTabsCopyModel>)) {
+    this.routesService.removeRoute(route);
     this.updateRouterConfig();
   }
 
   private updateRouterConfig() {
-    this.router.resetConfig(this.visibleRoutes);
+    const currentConfig = [...this.router.config];
+    const dynamicRoutesIndex = currentConfig.findIndex(route => route.path === 'dynamic-routes');
+      currentConfig[dynamicRoutesIndex] = {
+        ...currentConfig[dynamicRoutesIndex],
+        children: this.visibleRoutes()
+      };
+
+      this.router.resetConfig(currentConfig);
+
+      if (this.visibleRoutes().length > 0) {
+        this.router.navigate(['/dynamic-routes', this.visibleRoutes()[this.visibleRoutes().length - 1].path]);
+      }
   }
 }

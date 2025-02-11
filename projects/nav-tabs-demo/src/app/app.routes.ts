@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 import { RouteDataComponent } from './components/route-data/route-data.component';
 import { TabbableRoute } from 'nav-tabs';
 import { AppTabsCopyModel, TabTranslationKeys } from './models/copy';
+import {FeatureFlagDemoComponent} from "./components/feature-flag-demo/feature-flag-demo.component";
+import {DynamicRoutesDemoComponent} from "./components/dynamic-routes-demo/dynamic-routes-demo.component";
+import {StaticDemosComponent} from "./components/static-demos/static-demos.component";
+import {IntroComponent} from "./components/intro/intro.component";
 
 export const tabbableRoutes: TabbableRoute[] = [
   {
@@ -50,7 +54,7 @@ export const translatedRoutes: TabbableRoute<AppTabsCopyModel>[] = [
     },
   },
   {
-    path: 'profile-2',
+    path: 'profile',
     component: RouteDataComponent,
     data: {
       tabData: {
@@ -63,12 +67,94 @@ export const translatedRoutes: TabbableRoute<AppTabsCopyModel>[] = [
   },
 ];
 
-export const routes: Routes = [
+export const baseRoute: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'about',
     pathMatch: 'full',
   },
-  ...tabbableRoutes,
-  ...translatedRoutes,
+]
+
+export const routes: TabbableRoute[] = [
+  {
+    path: 'about',
+    component: IntroComponent,
+    pathMatch: 'full',
+    data: {
+      tabData: {
+        label: 'About',
+        order: 1,
+      },
+    }
+  },
+  {
+    path: 'simple-demos',
+    component: StaticDemosComponent,
+    children: [
+      ...tabbableRoutes,
+      ...translatedRoutes
+    ],
+    data: {
+      tabData: {
+        label: 'Simple Demos',
+        order: 1,
+      },
+    },
+  },
+  {
+    path: 'dynamic-routes',
+    component: DynamicRoutesDemoComponent,
+    children: [
+      ...tabbableRoutes,
+      ...translatedRoutes
+    ],
+    data: {
+      tabData: {
+        label: 'Dynamic Routes',
+        order: 1,
+      },
+    },
+  },
+  {
+    path: 'feature-flags',
+    component: FeatureFlagDemoComponent,
+    data: {
+      tabData: {
+        label: 'Feature Flags',
+        order: 1,
+      },
+    },
+    children: [
+      {
+        path: 'basic-feature',
+        component: RouteDataComponent,
+        data: {
+          tabData: {
+            label: 'Basic Feature',
+            order: 1,
+          },
+        },
+      },
+      {
+        path: 'basic-feature-2',
+        component: RouteDataComponent,
+        data: {
+          tabData: {
+            label: 'Basic Feature 2',
+            order: 2,
+          },
+        },
+      },
+      {
+        path: 'beta-feature',
+        component: RouteDataComponent,
+        data: {
+          tabData: {
+            label: 'Beta Feature',
+            order: 3,
+          },
+        },
+      }
+    ]
+  },
 ];
