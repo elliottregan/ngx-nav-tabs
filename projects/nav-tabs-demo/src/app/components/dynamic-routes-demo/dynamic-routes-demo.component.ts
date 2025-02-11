@@ -7,6 +7,7 @@ import { RouteFormComponent, RouteFormData } from '../route-form/route-form.comp
 import { RouteDataComponent } from '../route-data/route-data.component';
 import { AppTabsCopyModel } from '../../models/copy';
 import { DynamicRoutesService } from "../../services/dynamic-routes.service";
+import {TranslationServiceStub} from "../../services/translation-service-stub.service";
 
 @Component({
   selector: 'app-dynamic-routes-demo',
@@ -28,7 +29,7 @@ import { DynamicRoutesService } from "../../services/dynamic-routes.service";
       </section>
 
       <article>
-        <lib-nav-tabs [routes]="visibleRoutes()"></lib-nav-tabs>
+        <lib-nav-tabs [routes]="visibleRoutes()" [translations$]="tabsCopy$"></lib-nav-tabs>
         <router-outlet></router-outlet>
       </article>
     </section>
@@ -69,6 +70,7 @@ import { DynamicRoutesService } from "../../services/dynamic-routes.service";
 export class DynamicRoutesDemoComponent {
   private router = inject(Router);
   private routesService = inject(DynamicRoutesService);
+  tabsCopy$ = inject(TranslationServiceStub).tabsCopy$;
 
   visibleRoutes = this.routesService.getRoutes();
 

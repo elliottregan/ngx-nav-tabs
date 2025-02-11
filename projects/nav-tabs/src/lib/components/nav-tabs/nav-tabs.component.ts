@@ -18,8 +18,8 @@ const DEFAULT_TITLE = 'Page Navigation';
               <a
                 *ngFor="let route of sortedRoutes"
                 [routerLink]="route.path"
-                routerLinkActive="active"
-                class="nav-tab"
+                routerLinkActive="nav-tabs__tab--active"
+                class="nav-tabs__tab"
                 [ariaCurrentWhenActive]="'page'"
               >
                   {{ getLabel(route, translations) }}
@@ -30,8 +30,8 @@ const DEFAULT_TITLE = 'Page Navigation';
               <a
                 *ngFor="let route of sortedRoutes"
                 [routerLink]="route.path"
-                routerLinkActive="active"
-                class="nav-tab"
+                routerLinkActive="nav-tabs__tab--active"
+                class="nav-tabs__tab"
                 [ariaCurrentWhenActive]="'page'"
               >
                   {{ getLabel(route) }}
