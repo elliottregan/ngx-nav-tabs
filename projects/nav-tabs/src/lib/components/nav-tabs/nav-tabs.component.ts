@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
   selector: 'lib-nav-tabs',
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
+  styleUrls: ['./nav-tabs.component.scss'],
   template: `
       <nav class="nav-tabs">
           <!-- When translations$ is provided -->
@@ -34,7 +35,6 @@ import {Observable} from 'rxjs';
           </ng-container>
       </nav>
   `,
-  styleUrls: ['./nav-tabs.scss'],
 })
 export class NavTabsComponent<TKeys extends string = string> implements OnChanges {
   @Input() translations$?: Observable<TabLabelCopy<TKeys>>;
