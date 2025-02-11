@@ -2,7 +2,9 @@ import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {TabbableRoute, TabLabelCopy} from '../../models/tabs';
-import {Observable} from 'rxjs';
+import {isObservable, Observable, of} from 'rxjs';
+
+const DEFAULT_TITLE = 'Page Navigation';
 
 @Component({
   selector: 'lib-nav-tabs',
@@ -10,7 +12,7 @@ import {Observable} from 'rxjs';
   imports: [CommonModule, RouterLink, RouterLinkActive],
   styleUrls: ['./nav-tabs.component.scss'],
   template: `
-      <nav class="nav-tabs">
+      <nav class="nav-tabs" [attr.aria-label]="title$ | async">
           <!-- When translations$ is provided -->
           <ng-container *ngIf="translations$ | async as translations">
               <a
@@ -18,6 +20,7 @@ import {Observable} from 'rxjs';
                 [routerLink]="route.path"
                 routerLinkActive="active"
                 class="nav-tab"
+                [ariaCurrentWhenActive]="'page'"
               >
                   {{ getLabel(route, translations) }}
               </a>
@@ -29,6 +32,7 @@ import {Observable} from 'rxjs';
                 [routerLink]="route.path"
                 routerLinkActive="active"
                 class="nav-tab"
+                [ariaCurrentWhenActive]="'page'"
               >
                   {{ getLabel(route) }}
               </a>
@@ -39,7 +43,10 @@ import {Observable} from 'rxjs';
 export class NavTabsComponent<TKeys extends string = string> implements OnChanges {
   @Input() translations$?: Observable<TabLabelCopy<TKeys>>;
   @Input({required: true}) routes: TabbableRoute<TabLabelCopy<TKeys> | void>[] = [];
-
+  @Input() set title(value: string | Observable<string>) {
+    this.title$ = isObservable(value) ? value : of(value || DEFAULT_TITLE);
+  }
+  title$: Observable<string> = of(DEFAULT_TITLE);
   sortedRoutes: TabbableRoute<TabLabelCopy<TKeys> | void>[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
