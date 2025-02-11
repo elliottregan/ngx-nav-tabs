@@ -68,7 +68,9 @@ export interface RouteFormData {
                       </option>
                   </select>
               </div>
-              <button type="submit" class="button">Add Route</button>
+              <div class="form-field">
+                  <button type="submit" class="button">Add Route</button>
+              </div>
           </form>
       </div>
   `,
@@ -97,6 +99,7 @@ export interface RouteFormData {
       .form-field {
           display: flex;
           flex-direction: column;
+          justify-content: flex-end;
       }
 
       label {
@@ -117,9 +120,10 @@ export interface RouteFormData {
       .button {
           padding: 0.5rem 1rem;
           background-color: #3b82f6;
+          border: 1px solid #3b82f6;
           color: white;
-          border: none;
           border-radius: 0.25rem;
+          line-height: 1.25;
           cursor: pointer;
           white-space: nowrap;
       }
