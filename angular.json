@@ -28,7 +28,10 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/nav-tabs/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
@@ -50,13 +53,17 @@
             "outputPath": "dist/nav-tabs-demo",
             "index": "projects/nav-tabs-demo/src/index.html",
             "main": "projects/nav-tabs-demo/src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/nav-tabs-demo/tsconfig.app.json",
             "assets": [
               "projects/nav-tabs-demo/src/favicon.ico",
               "projects/nav-tabs-demo/src/assets"
             ],
-            "styles": ["projects/nav-tabs-demo/src/styles.scss"],
+            "styles": [
+              "projects/nav-tabs-demo/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -101,17 +108,25 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "projects/nav-tabs-demo/tsconfig.spec.json",
             "assets": [
               "projects/nav-tabs-demo/src/favicon.ico",
               "projects/nav-tabs-demo/src/assets"
             ],
-            "styles": ["projects/nav-tabs-demo/src/styles.scss"],
+            "styles": [
+              "projects/nav-tabs-demo/src/styles.scss"
+            ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

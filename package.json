@@ -6,7 +6,7 @@
     "build:lib": "ng build nav-tabs",
     "build:demo": "ng build nav-tabs-demo",
     "serve:demo": "ng serve nav-tabs-demo",
-    "build": "npm run build:lib && sleep 5 && npm run build:demo",
+    "serve:lib": "ng build nav-tabs --watch",
     "test": "ng test"
   },
   "dependencies": {
