@@ -44,11 +44,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/nav-tabs-demo",
+            "outputPath": {
+              "base": "dist/nav-tabs-demo"
+            },
             "index": "projects/nav-tabs-demo/src/index.html",
-            "main": "projects/nav-tabs-demo/src/main.ts",
             "tsConfig": "projects/nav-tabs-demo/tsconfig.app.json",
             "assets": [
               "projects/nav-tabs-demo/src/_redirects",
@@ -58,7 +59,8 @@
             "styles": [
               "projects/nav-tabs-demo/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/nav-tabs-demo/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -77,9 +79,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
