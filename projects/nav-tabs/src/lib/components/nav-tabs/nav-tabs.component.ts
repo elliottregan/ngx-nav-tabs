@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TabbableRoute, TabLabelCopy } from '../../models/tabs';
@@ -60,15 +60,15 @@ import { Observable } from 'rxjs';
   ],
 })
 export class NavTabsComponent<TKeys extends string = string> implements OnChanges {
-  @Input({ required: true })
-  routes: TabbableRoute<TabLabelCopy<TKeys> | void>[] = [];
-
   @Input() translations$?: Observable<TabLabelCopy<TKeys>>;
+  @Input({ required: true }) routes: TabbableRoute<TabLabelCopy<TKeys> | void>[] = [];
 
   sortedRoutes: TabbableRoute<TabLabelCopy<TKeys> | void>[] = [];
 
-  ngOnChanges() {
-    this.sortRoutes();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['routes']) {
+      this.sortRoutes();
+    }
   }
 
   private sortRoutes() {
@@ -77,6 +77,7 @@ export class NavTabsComponent<TKeys extends string = string> implements OnChange
     );
   }
 
+  // TODO: avoid a getter in the template
   getLabel(
       route: TabbableRoute<TabLabelCopy<TKeys> | void>,
       translations?: TabLabelCopy<TKeys>
