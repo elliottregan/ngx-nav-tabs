@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TabbableRoute, TabLabelCopy } from '../../models/tabs';
@@ -13,24 +13,23 @@ import { Observable } from 'rxjs';
       <!-- When translations$ is provided -->
       <ng-container *ngIf="translations$ | async as translations">
         <a
-          *ngFor="let route of routes"
-          [routerLink]="route.path"
-          routerLinkActive="active"
-          class="nav-tab"
+        *ngFor="let route of sortedRoutes"
+        [routerLink]="route.path"
+        routerLinkActive="active"
+        class="nav-tab"
         >
-          {{ getLabel(route, translations) }}
+        {{ getLabel(route, translations) }}
         </a>
       </ng-container>
-
       <!-- When translations$ is not provided -->
       <ng-container *ngIf="!translations$">
         <a
-          *ngFor="let route of routes"
-          [routerLink]="route.path"
-          routerLinkActive="active"
-          class="nav-tab"
+        *ngFor="let route of sortedRoutes"
+        [routerLink]="route.path"
+        routerLinkActive="active"
+        class="nav-tab"
         >
-          {{ getLabel(route) }}
+        {{ getLabel(route) }}
         </a>
       </ng-container>
     </nav>
@@ -60,20 +59,32 @@ import { Observable } from 'rxjs';
     `,
   ],
 })
-export class NavTabsComponent<TKeys extends string = string> {
+export class NavTabsComponent<TKeys extends string = string> implements OnChanges {
   @Input({ required: true })
   routes: TabbableRoute<TabLabelCopy<TKeys> | void>[] = [];
 
   @Input() translations$?: Observable<TabLabelCopy<TKeys>>;
 
+  sortedRoutes: TabbableRoute<TabLabelCopy<TKeys> | void>[] = [];
+
+  ngOnChanges() {
+    this.sortRoutes();
+  }
+
+  private sortRoutes() {
+    this.sortedRoutes = [...this.routes].sort(
+        (a, b) => a.data.tabData.order - b.data.tabData.order
+    );
+  }
+
   getLabel(
-    route: TabbableRoute<TabLabelCopy<TKeys> | void>,
-    translations?: TabLabelCopy<TKeys>
+      route: TabbableRoute<TabLabelCopy<TKeys> | void>,
+      translations?: TabLabelCopy<TKeys>
   ): string {
     if (translations && 'translationKey' in route.data.tabData) {
       return (
-        translations[route.data.tabData.translationKey as TKeys] ||
-        route.data.tabData.label
+          translations[route.data.tabData.translationKey as TKeys] ||
+          route.data.tabData.label
       );
     }
     return route.data.tabData.label;

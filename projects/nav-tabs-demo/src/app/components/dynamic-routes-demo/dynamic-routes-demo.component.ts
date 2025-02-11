@@ -2,9 +2,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { NavTabsComponent } from 'nav-tabs';
-import { RouteFormComponent } from '../route-form/route-form.component';
-import { TabbableRoute } from 'nav-tabs';
+import { NavTabsComponent, TabbableRoute } from 'nav-tabs';
+import { RouteFormComponent, RouteFormData } from '../route-form/route-form.component';
 import { RouteDataComponent } from '../route-data/route-data.component';
 import { AppTabsCopyModel } from '../../models/copy';
 import { tabbableRoutes, translatedRoutes } from '../../app.routes';
@@ -81,7 +80,7 @@ export class DynamicRoutesDemoComponent {
     ];
   }
 
-  addRoute(formData: { path: string; label: string; translationKey?: string }) {
+  addRoute(formData: RouteFormData) {
     const route = formData.translationKey
       ? {
           path: formData.path,
@@ -90,13 +89,14 @@ export class DynamicRoutesDemoComponent {
             tabData: {
               translationKey: formData.translationKey,
               label: formData.label,
+              order: formData.order,
             },
           },
         }
       : {
           path: formData.path,
           component: RouteDataComponent,
-          data: { tabData: { label: formData.label } },
+          data: { tabData: { label: formData.label, order: formData.order, } },
         };
 
     this.dynamicRoutes.push(route);

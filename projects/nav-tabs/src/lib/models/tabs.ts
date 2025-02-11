@@ -9,9 +9,11 @@ export interface TabbableRoute<T extends TabLabelCopy<string> | void = void>
       ? {
           translationKey: Keys;
           label: string;
+          order: number;
         }
       : {
           label: string;
+          order: number;
         };
     [key: string]: any;
   };

@@ -10,6 +10,7 @@ export const tabbableRoutes: TabbableRoute[] = [
     data: {
       tabData: {
         label: 'Dashboard',
+        order: 1,
       },
       description: 'Main dashboard view',
       features: ['Analytics', 'Reports', 'Settings'],
@@ -21,6 +22,7 @@ export const tabbableRoutes: TabbableRoute[] = [
     data: {
       tabData: {
         label: 'User Profile',
+        order: 1,
       },
       description: 'User profile and preferences',
       lastUpdated: new Date().toLocaleDateString('en-US', {
@@ -41,6 +43,7 @@ export const translatedRoutes: TabbableRoute<AppTabsCopyModel>[] = [
       tabData: {
         translationKey: TabTranslationKeys.SETTINGS,
         label: 'Settings',
+        order: 1,
       },
       description: 'Application settings and configuration',
       categories: ['General', 'Security', 'Notifications'],
@@ -53,6 +56,7 @@ export const translatedRoutes: TabbableRoute<AppTabsCopyModel>[] = [
       tabData: {
         translationKey: 'PROFILE',
         label: 'Profile 2',
+        order: 1,
       },
       description: 'This tab uses a translated value.',
     },

@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
     <section class="feature-flag-demo">
       <h2>Feature Flag Demo</h2>
       <p>Toggle features to add/remove corresponding tabs:</p>
-
       <div class="feature-toggles">
         <div *ngFor="let feature of availableFeatures" class="toggle-item">
           <label class="toggle-label">
@@ -76,6 +75,7 @@ export class FeatureFlagDemoComponent {
       data: {
         tabData: {
           label: 'Basic Feature',
+          order: 1,
         },
       },
     },
@@ -85,6 +85,7 @@ export class FeatureFlagDemoComponent {
       data: {
         tabData: {
           label: 'Basic Feature 2',
+          order: 2,
         },
       },
     },
@@ -94,6 +95,7 @@ export class FeatureFlagDemoComponent {
       data: {
         tabData: {
           label: 'Beta Feature',
+          order: 3,
         },
       },
     },

@@ -7,9 +7,10 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-interface RouteFormData {
+export interface RouteFormData {
   path: string;
   label: string;
+  order: number;
   translationKey?: string;
 }
 
@@ -32,6 +33,13 @@ interface RouteFormData {
           placeholder="Label"
           class="input"
           [class.error]="routeForm.get('label')?.invalid && routeForm.get('label')?.touched"
+        />
+        <input
+          formControlName="order"
+          placeholder="Order"
+          class="input"
+          type="number"
+          [class.error]="routeForm.get('order')?.invalid && routeForm.get('order')?.touched"
         />
         <input
           formControlName="translationKey"
@@ -91,19 +99,21 @@ export class RouteFormComponent {
     this.routeForm = this.fb.group({
       path: ['', [Validators.required, Validators.pattern(/^[a-z0-9-]+$/)]],
       label: ['', Validators.required],
+      order: [1, Validators.required],
       translationKey: ['', [Validators.pattern(/^[A-Z0-9_]+$/)]],
     });
   }
 
   onSubmit() {
     if (this.routeForm.valid) {
-      const formValue = this.routeForm.value;
+      const { path, label, order, translationKey } = this.routeForm.value;
       // Only include translationKey if it has a value
       const routeData: RouteFormData = {
-        path: formValue.path,
-        label: formValue.label,
-        ...(formValue.translationKey && {
-          translationKey: formValue.translationKey,
+        path,
+        label,
+        order,
+        ...(translationKey && {
+          translationKey,
         }),
       };
       this.routeAdded.emit(routeData);
