@@ -6,4 +6,8 @@ export enum TabTranslationKeys {
   DASHBOARD = 'DASHBOARD',
 }
 
+// other option:
+// type ValidKeys = 'SETTINGS' | 'PROFILE' | 'DASHBOARD';
+// export type AppTabsCopyModel = TabLabelCopy<ValidKeys>;
+
 export type AppTabsCopyModel = TabLabelCopy<keyof typeof TabTranslationKeys>;
