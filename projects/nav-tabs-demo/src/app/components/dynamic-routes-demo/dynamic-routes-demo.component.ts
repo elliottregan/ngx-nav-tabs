@@ -11,71 +11,72 @@ import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-dynamic-routes-demo',
-  standalone: true,
   imports: [NavTabsComponent, RouteFormComponent, RouterOutlet, NgForOf],
   template: `
-    <section class="dynamic-routes-demo">
-      <h2>Dynamic Routes</h2>
-      <app-route-form (routeAdded)="addRoute($event)"></app-route-form>
+      <section class="dynamic-routes-demo">
+          <h2>Dynamic Routes</h2>
+          <app-route-form (routeAdded)="addRoute($event)"></app-route-form>
 
-      <section class="route-list">
-        <h3>Created Routes</h3>
-        <div *ngFor="let route of visibleRoutes()" class="route-item">
-          <span>{{ route.data.tabData.label }} <em>/{{ route.path }}</em></span>
-          <button (click)="removeRoute(route)" class="button delete">
-            Remove
-          </button>
-        </div>
+          <section class="route-list">
+              <h3>Created Routes</h3>
+              <div *ngFor="let route of visibleRoutes()" class="route-item">
+                  <span>{{ route.data.tabData.label }} <em>/{{ route.path }}</em></span>
+                  <button (click)="removeRoute(route)" class="button delete">
+                      Remove
+                  </button>
+              </div>
+          </section>
+
+          <article>
+              <lib-nav-tabs [routes]="visibleRoutes()" [translations$]="tabsCopy$"></lib-nav-tabs>
+              <router-outlet></router-outlet>
+          </article>
       </section>
-
-      <article>
-        <lib-nav-tabs [routes]="visibleRoutes()" [translations$]="tabsCopy$"></lib-nav-tabs>
-        <router-outlet></router-outlet>
-      </article>
-    </section>
   `,
+  standalone: true,
   styles: [
     `
-      .dynamic-routes-demo {
-        margin-bottom: 2rem;
-      }
+        .dynamic-routes-demo {
+            margin-bottom: 2rem;
+        }
 
-      .route-list {
-          padding: 2rem;
-          background-color: #fff;
-          border-radius: 0.5rem;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-          > * {
-              margin-top: 0;
-          }
-      }
+        .route-list {
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
-      .route-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem;
-        border-bottom: 1px solid #e2e8f0;
-          
-          &:last-of-type {
-              border-bottom: none;
-          }
-      }
+            > * {
+                margin-top: 0;
+            }
+        }
 
-      .button.delete {
-        padding: 0.5rem 1rem;
-        background-color: #ef4444;
-        color: white;
-        border: none;
-        border-radius: 0.25rem;
-        cursor: pointer;
-      }
+        .route-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
 
-      .button.delete:hover {
-        background-color: #dc2626;
-      }
+            &:last-of-type {
+                border-bottom: none;
+            }
+        }
+
+        .button.delete {
+            padding: 0.5rem 1rem;
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
+        .button.delete:hover {
+            background-color: #dc2626;
+        }
     `,
-  ],
+  ]
 })
 export class DynamicRoutesDemoComponent {
   private router = inject(Router);

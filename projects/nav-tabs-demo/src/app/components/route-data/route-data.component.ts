@@ -3,9 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import {KeyValuePipe} from "@angular/common";
 
 @Component({
-  selector: 'app-route-data',
-  standalone: true,
-  template: `
+    selector: 'app-route-data',
+    template: `
       <div class="card">
           <div class="card-header">
               <h2>Route Data</h2>
@@ -36,7 +35,7 @@ import {KeyValuePipe} from "@angular/common";
           </div>
       </div>
   `,
-  styles: [`
+    styles: [`
       .card {
           background: white;
           border-radius: 8px;
@@ -110,9 +109,9 @@ import {KeyValuePipe} from "@angular/common";
           font-weight: 600;
       }
   `],
-  imports: [
-    KeyValuePipe
-  ]
+    imports: [
+        KeyValuePipe
+    ]
 })
 export class RouteDataComponent {
   private route = inject(ActivatedRoute);

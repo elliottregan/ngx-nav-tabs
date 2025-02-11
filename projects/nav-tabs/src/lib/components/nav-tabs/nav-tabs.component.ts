@@ -7,11 +7,10 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 const DEFAULT_TITLE = 'Page Navigation';
 
 @Component({
-  selector: 'lib-nav-tabs',
-  standalone: true,
-  imports: [RouterLink, RouterLinkActive, AsyncPipe, NgIf, NgForOf],
-  styleUrls: ['./nav-tabs.component.scss'],
-  template: `
+    selector: 'lib-nav-tabs',
+    imports: [RouterLink, RouterLinkActive, AsyncPipe, NgIf, NgForOf],
+    styleUrls: ['./nav-tabs.component.scss'],
+    template: `
       <nav [class]="baseClass" [attr.aria-label]="title$ | async">
           <a
               *ngFor="let route of sortedRoutes"
@@ -28,7 +27,7 @@ const DEFAULT_TITLE = 'Page Navigation';
               </ng-container>
           </a>
       </nav>
-  `,
+  `
 })
 export class NavTabsComponent<TKeys extends string = string> implements OnChanges {
   @Input() translations$?: Observable<TabLabelCopy<TKeys>>;

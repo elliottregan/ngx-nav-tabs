@@ -16,10 +16,9 @@ export interface RouteFormData {
 }
 
 @Component({
-  selector: 'app-route-form',
-  standalone: true,
-  imports: [NgForOf, ReactiveFormsModule],
-  template: `
+    selector: 'app-route-form',
+    imports: [NgForOf, ReactiveFormsModule],
+    template: `
       <div class="route-manager">
           <h3>Add New Route</h3>
           <form [formGroup]="routeForm" (ngSubmit)="onSubmit()" class="form-group">
@@ -74,8 +73,8 @@ export interface RouteFormData {
           </form>
       </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .route-manager {
         padding: 2rem;
           margin: 1rem 0;
@@ -141,7 +140,7 @@ export interface RouteFormData {
           appearance: auto;
       }
     `,
-  ],
+    ]
 })
 export class RouteFormComponent {
   routeForm: FormGroup;

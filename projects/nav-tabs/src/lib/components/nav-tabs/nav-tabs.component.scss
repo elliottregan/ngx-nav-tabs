@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $colors: (
         default: (
                 border: #e2e8f0,
@@ -11,19 +13,19 @@ $colors: (
 );
 
 @mixin theme-variables($theme) {
-  --border-color: #{map-get($theme, border)};
-  --nav-background: #{map-get($theme, background)};
-  --tab-text-color: #{map-get($theme, text)};
-  --tab-hover-bg: #{map-get($theme, hover-bg)};
-  --tab-hover-text: #{map-get($theme, hover-text)};
-  --tab-active-bg: #{map-get($theme, active-bg)};
-  --tab-active-text: #{map-get($theme, active-text)};
+  --border-color: #{map.get($theme, border)};
+  --nav-background: #{map.get($theme, background)};
+  --tab-text-color: #{map.get($theme, text)};
+  --tab-hover-bg: #{map.get($theme, hover-bg)};
+  --tab-hover-text: #{map.get($theme, hover-text)};
+  --tab-active-bg: #{map.get($theme, active-bg)};
+  --tab-active-text: #{map.get($theme, active-text)};
   --tab-underline-width: 2px;
 }
 
 // TODO: move to global scope
 ::ng-deep :root {
-  @include theme-variables(map-get($colors, default));
+  @include theme-variables(map.get($colors, default));
 }
 
 .nav-tabs {
