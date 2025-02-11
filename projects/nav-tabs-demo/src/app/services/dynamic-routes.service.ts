@@ -1,7 +1,7 @@
 import { TabbableRoute } from "nav-tabs";
 import { Injectable, signal } from "@angular/core";
 import { AppTabsCopyModel } from "../models/copy";
-import { tabbableRoutes, translatedRoutes } from "../app.routes";
+import {tabbableRoutes, translatedRoutes} from "../stubs.routes";
 
 @Injectable({
   providedIn: 'root'

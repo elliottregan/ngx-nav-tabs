@@ -3,9 +3,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavTabsComponent } from 'nav-tabs';
-import { TabbableRoute } from 'nav-tabs';
-import { tabbableRoutes, translatedRoutes } from '../../app.routes';
 import { TranslationServiceStub } from '../../services/translation-service-stub.service';
+import { translatedRoutes} from "../../stubs.routes";
 
 @Component({
     selector: 'app-static-demos',
@@ -15,7 +14,7 @@ import { TranslationServiceStub } from '../../services/translation-service-stub.
     <section class="translation-demo">
       <article>
         <h2>Routes without translations:</h2>
-        <lib-nav-tabs [routes]="baseRoutes"></lib-nav-tabs>
+        <lib-nav-tabs [routes]="translatedRoutes"></lib-nav-tabs>
       </article>
 
       <article>
@@ -42,7 +41,6 @@ import { TranslationServiceStub } from '../../services/translation-service-stub.
   `]
 })
 export class StaticDemosComponent {
-    baseRoutes: TabbableRoute[] = tabbableRoutes;
     translatedRoutes = translatedRoutes;
     tabsCopy$ = inject(TranslationServiceStub).tabsCopy$;
 }
