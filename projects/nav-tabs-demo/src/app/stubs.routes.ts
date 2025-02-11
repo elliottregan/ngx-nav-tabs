@@ -35,7 +35,7 @@ export const translatedRoutes: TabbableRoute<AppTabsCopyModel>[] = [
       tabData: {
         translationKey: TabTranslationKeys.DASHBOARD,
         label: 'Dashboard',
-        order: 1,
+        order: 2,
       },
       description: 'This tab uses a translated value.',
     },
@@ -48,8 +48,8 @@ export const tabbableRoutes: TabbableRoute[] = [
     component: RouteDataComponent,
     data: {
       tabData: {
-        label: 'Settings',
-        order: 1,
+        label: 'Dashboard',
+        order: 0,
       },
       description: 'Main dashboard view',
       features: ['Analytics', 'Reports', 'Settings'],
@@ -61,7 +61,7 @@ export const tabbableRoutes: TabbableRoute[] = [
     data: {
       tabData: {
         label: 'User Profile',
-        order: 1,
+        order: 2,
       },
       description: 'User profile and preferences',
       lastUpdated: new Date().toLocaleDateString('en-US', {

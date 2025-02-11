@@ -30,7 +30,11 @@ export const routes: TabbableRoute[] = [
     path: 'simple-demos',
     component: StaticDemosComponent,
     children: [
-      ...tabbableRoutes,
+      {
+        path: '',
+        redirectTo: translatedRoutes[0].path,
+        pathMatch: 'full'
+      },
       ...translatedRoutes
     ],
     data: {
@@ -44,13 +48,17 @@ export const routes: TabbableRoute[] = [
     path: 'dynamic-routes',
     component: DynamicRoutesDemoComponent,
     children: [
+      {
+        path: '',
+        redirectTo: tabbableRoutes[0].path,
+        pathMatch: 'full'
+      },
       ...tabbableRoutes,
-      ...translatedRoutes
     ],
     data: {
       tabData: {
         label: 'Dynamic Routes',
-        order: 1,
+        order: 2,
       },
     },
   },
@@ -60,9 +68,17 @@ export const routes: TabbableRoute[] = [
     data: {
       tabData: {
         label: 'Feature Flags',
-        order: 1,
+        order: 3,
       },
     },
-    children: featureFlagRoutes
+    children: [
+
+      {
+        path: '',
+        redirectTo: featureFlagRoutes[0].path,
+        pathMatch: 'full'
+      },
+      ...featureFlagRoutes
+      ]
   },
 ];

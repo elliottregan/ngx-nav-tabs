@@ -75,9 +75,11 @@ export interface RouteFormData {
   styles: [
     `
       .route-manager {
-        padding: 1rem;
-        /*border: 1px solid #e2e8f0;*/
-        background-color: #f8fafc;
+        padding: 2rem;
+          margin: 1rem 0;
+          background-color: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 0.5rem;
 
         > * {
             margin-top: 0;

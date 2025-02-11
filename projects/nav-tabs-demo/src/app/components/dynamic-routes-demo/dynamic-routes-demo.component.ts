@@ -41,7 +41,13 @@ import {TranslationServiceStub} from "../../services/translation-service-stub.se
       }
 
       .route-list {
-        padding: 1rem;
+          padding: 2rem;
+          background-color: #fff;
+          border-radius: 0.5rem;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          > * {
+              margin-top: 0;
+          }
       }
 
       .route-item {
@@ -50,6 +56,10 @@ import {TranslationServiceStub} from "../../services/translation-service-stub.se
         align-items: center;
         padding: 0.5rem;
         border-bottom: 1px solid #e2e8f0;
+          
+          &:last-of-type {
+              border-bottom: none;
+          }
       }
 
       .button.delete {

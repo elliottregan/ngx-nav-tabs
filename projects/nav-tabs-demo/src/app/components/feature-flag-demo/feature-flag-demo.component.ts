@@ -30,6 +30,7 @@ import {Router, RouterOutlet} from '@angular/router';
       <article class="demo-section">
         <lib-nav-tabs [routes]="visibleRoutes"></lib-nav-tabs>
         <router-outlet></router-outlet>
+        <p>The order of the tabs remains consistent.</p>
       </article>
     </section>
   `,
@@ -46,6 +47,7 @@ import {Router, RouterOutlet} from '@angular/router';
         margin: 1rem 0;
         padding: 1rem;
         background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
         border-radius: 0.5rem;
       }
 
