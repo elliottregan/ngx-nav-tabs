@@ -18,19 +18,24 @@ $colors: (
   --tab-hover-text: #{map-get($theme, hover-text)};
   --tab-active-bg: #{map-get($theme, active-bg)};
   --tab-active-text: #{map-get($theme, active-text)};
+  --tab-underline-width: 2px;
+}
+
+// TODO: move to global scope
+::ng-deep :root {
+  @include theme-variables(map-get($colors, default));
 }
 
 :host {
-  @include theme-variables(map-get($colors, default));
   display: block;
   overflow: scroll;
 }
 
 .nav-tabs {
   display: flex;
-  padding: 0.75rem 0;
   background: var(--nav-background);
-  overflow: scroll;
+  overflow-x: scroll;
+  padding: 0.1em;
 
   &__tab {
     flex: 0 0 auto;
@@ -63,7 +68,7 @@ $colors: (
         bottom: -1px;
         left: 0;
         right: 0;
-        height: 2px;
+        height: var(--tab-underline-width, 2px);
         background-color: currentColor;
       }
     }

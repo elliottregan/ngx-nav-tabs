@@ -19,7 +19,7 @@ import {routes} from "./app.routes";
   ],
   template: `
     <main class="content">
-      <lib-nav-tabs [routes]="routes"></lib-nav-tabs>
+      <lib-nav-tabs [routes]="routes" style="margin-top: 1em"></lib-nav-tabs>
       <h1>Nav Tabs Component Demo</h1>
       <router-outlet></router-outlet>
 

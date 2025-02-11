@@ -12,7 +12,7 @@ import {CommonModule} from '@angular/common';
           <h3>WCAG Compliant</h3>
           <p>
               Built-in accessibility support that meets WCAG 2.2 AA guidelines. Includes keyboard navigation, screen
-              reader compatibility, and semantic HTML generation.
+              reader compatibility, and semantic HTML with ARIA notations.
           </p>
 
           <h3>Config-Based Tab Configuration</h3>
