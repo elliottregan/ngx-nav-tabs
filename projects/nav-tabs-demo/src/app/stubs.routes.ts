@@ -33,8 +33,8 @@ export const translatedRoutes: TabbableRoute<AppTabsCopyModel>[] = [
     component: RouteDataComponent,
     data: {
       tabData: {
-        translationKey: 'PROFILE',
-        label: 'User Profile',
+        translationKey: TabTranslationKeys.DASHBOARD,
+        label: 'Dashboard',
         order: 1,
       },
       description: 'This tab uses a translated value.',
