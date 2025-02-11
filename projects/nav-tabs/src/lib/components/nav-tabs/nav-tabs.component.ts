@@ -13,30 +13,20 @@ const DEFAULT_TITLE = 'Page Navigation';
   styleUrls: ['./nav-tabs.component.scss'],
   template: `
       <nav [class]="baseClass" [attr.aria-label]="title$ | async">
-          <!-- When translations$ is provided -->
-          <ng-container *ngIf="translations$ | async as translations">
-              <a
-                *ngFor="let route of sortedRoutes"
-                [routerLink]="route.path"
-                [routerLinkActive]="baseClass + '__tab--active'"
-                [class]="baseClass + '__tab'"
-                [ariaCurrentWhenActive]="'page'"
-              >
+          <a
+              *ngFor="let route of sortedRoutes"
+              [routerLink]="route.path"
+              [routerLinkActive]="baseClass + '__tab--active'"
+              [class]="baseClass + '__tab'"
+              [ariaCurrentWhenActive]="'page'"
+          >
+              <ng-container *ngIf="translations$ | async as translations">
                   {{ getLabel(route, translations) }}
-              </a>
-          </ng-container>
-          <!-- When translations$ is not provided -->
-          <ng-container *ngIf="!translations$">
-              <a
-                *ngFor="let route of sortedRoutes"
-                [routerLink]="route.path"
-                [routerLinkActive]="baseClass + '__tab--active'"
-                [class]="baseClass + '__tab'"
-                [ariaCurrentWhenActive]="'page'"
-              >
+              </ng-container>
+              <ng-container *ngIf="!translations$">
                   {{ getLabel(route) }}
-              </a>
-          </ng-container>
+              </ng-container>
+          </a>
       </nav>
   `,
 })
@@ -48,12 +38,16 @@ export class NavTabsComponent<TKeys extends string = string> implements OnChange
   }
   @Input() useLinks = false;
 
+  baseClass: string = 'nav-tabs';
   title$: Observable<string> = of(DEFAULT_TITLE);
   sortedRoutes: TabbableRoute<TabLabelCopy<TKeys> | void>[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['routes']) {
       this.sortRoutes();
+    }
+    if (changes['useLinks']) {
+      this.baseClass = changes['useLinks'] ? 'nav-links' : 'nav-tabs'
     }
   }
 
@@ -69,10 +63,6 @@ export class NavTabsComponent<TKeys extends string = string> implements OnChange
       );
     }
     return route.data.tabData.label;
-  }
-
-  get baseClass(): string {
-    return this.useLinks ? 'nav-links' : 'nav-tabs';
   }
 
   private sortRoutes() {
