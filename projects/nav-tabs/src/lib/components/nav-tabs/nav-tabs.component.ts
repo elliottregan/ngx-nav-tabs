@@ -12,14 +12,14 @@ const DEFAULT_TITLE = 'Page Navigation';
   imports: [CommonModule, RouterLink, RouterLinkActive],
   styleUrls: ['./nav-tabs.component.scss'],
   template: `
-      <nav class="nav-tabs" [attr.aria-label]="title$ | async">
+      <nav [class]="baseClass" [attr.aria-label]="title$ | async">
           <!-- When translations$ is provided -->
           <ng-container *ngIf="translations$ | async as translations">
               <a
                 *ngFor="let route of sortedRoutes"
                 [routerLink]="route.path"
-                routerLinkActive="nav-tabs__tab--active"
-                class="nav-tabs__tab"
+                [routerLinkActive]="baseClass + '__tab--active'"
+                [class]="baseClass + '__tab'"
                 [ariaCurrentWhenActive]="'page'"
               >
                   {{ getLabel(route, translations) }}
@@ -30,8 +30,8 @@ const DEFAULT_TITLE = 'Page Navigation';
               <a
                 *ngFor="let route of sortedRoutes"
                 [routerLink]="route.path"
-                routerLinkActive="nav-tabs__tab--active"
-                class="nav-tabs__tab"
+                [routerLinkActive]="baseClass + '__tab--active'"
+                [class]="baseClass + '__tab'"
                 [ariaCurrentWhenActive]="'page'"
               >
                   {{ getLabel(route) }}
@@ -46,6 +46,8 @@ export class NavTabsComponent<TKeys extends string = string> implements OnChange
   @Input() set title(value: string | Observable<string>) {
     this.title$ = isObservable(value) ? value : of(value || DEFAULT_TITLE);
   }
+  @Input() useLinks = false;
+
   title$: Observable<string> = of(DEFAULT_TITLE);
   sortedRoutes: TabbableRoute<TabLabelCopy<TKeys> | void>[] = [];
 
@@ -67,6 +69,10 @@ export class NavTabsComponent<TKeys extends string = string> implements OnChange
       );
     }
     return route.data.tabData.label;
+  }
+
+  get baseClass(): string {
+    return this.useLinks ? 'nav-links' : 'nav-tabs';
   }
 
   private sortRoutes() {

@@ -23,83 +23,117 @@ export interface RouteFormData {
       <div class="route-manager">
           <h3>Add New Route</h3>
           <form [formGroup]="routeForm" (ngSubmit)="onSubmit()" class="form-group">
-              <input
-                      formControlName="path"
-                      placeholder="Path"
-                      class="input"
-                      [class.error]="routeForm.get('path')?.invalid && routeForm.get('path')?.touched"
-              />
-              <input
-                      formControlName="label"
-                      placeholder="Label"
-                      class="input"
-                      [class.error]="routeForm.get('label')?.invalid && routeForm.get('label')?.touched"
-              />
-              <input
-                      formControlName="order"
-                      placeholder="Order"
-                      class="input"
-                      type="number"
-                      [class.error]="routeForm.get('order')?.invalid && routeForm.get('order')?.touched"
-              />
-              <select
-                      formControlName="translationKey"
-                      class="input"
-                      [class.error]="routeForm.get('translationKey')?.invalid && routeForm.get('translationKey')?.touched"
-              >
-                  <option value="">Select Translation Key (optional)</option>
-                  <option *ngFor="let key of translationKeys" [value]="key">
-                      {{ key }}
-                  </option>
-              </select>
-              <button type="submit" class="button" [disabled]="routeForm.invalid">Add Route</button>
+              <div class="form-field">
+                  <label for="path">Path</label>
+                  <input
+                          id="path"
+                          formControlName="path"
+                          placeholder="/home"
+                          class="input"
+                          [class.error]="routeForm.get('path')?.invalid && routeForm.get('path')?.touched"
+                  />
+              </div>
+              <div class="form-field">
+                  <label for="label">Label</label>
+                  <input
+                          id="label"
+                          formControlName="label"
+                          placeholder="Home"
+                          class="input"
+                          [class.error]="routeForm.get('label')?.invalid && routeForm.get('label')?.touched"
+                  />
+              </div>
+              <div class="form-field">
+                  <label for="order">Order</label>
+                  <input
+                          id="order"
+                          formControlName="order"
+                          placeholder="Order"
+                          class="input"
+                          type="number"
+                          [class.error]="routeForm.get('order')?.invalid && routeForm.get('order')?.touched"
+                  />
+              </div>
+              <div class="form-field">
+                  <label for="translationKey">Translation Key (optional)</label>
+                  <select
+                          id="translationKey"
+                          formControlName="translationKey"
+                          class="input"
+                          [class.error]="routeForm.get('translationKey')?.invalid && routeForm.get('translationKey')?.touched"
+                  >
+                      <option value="">None</option>
+                      <option *ngFor="let key of translationKeys" [value]="key">
+                          {{ key }}
+                      </option>
+                  </select>
+              </div>
+              <button type="submit" class="button">Add Route</button>
           </form>
       </div>
   `,
   styles: [
     `
-        .route-manager {
-            padding: 1rem;
-            border: 1px solid #e2e8f0;
+      .route-manager {
+        padding: 1rem;
+        /*border: 1px solid #e2e8f0;*/
+        background-color: #f8fafc;
 
-            > * {
-                margin-top: 0;
-            }
+        > * {
+            margin-top: 0;
+            margin-bottom: 0;
         }
-        .form-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-        .input {
-            padding: 0.5rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.25rem;
-            flex: 1;
-        }
-        .input.error {
-            border-color: #ef4444;
-        }
-        .button {
-            padding: 0.5rem 1rem;
-            background-color: #3b82f6;
-            color: white;
-            border: none;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .button:disabled {
-            background-color: #93c5fd;
-            cursor: not-allowed;
-        }
-        .button:not(:disabled):hover {
-            background-color: #2563eb;
-        }
-        select.input {
-            appearance: auto;
-        }
+      }
+
+      .form-group {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-top: 0.5rem;
+      }
+      
+      .form-field {
+          display: flex;
+          flex-direction: column;
+      }
+
+      label {
+          font-weight: 600;
+      }
+      
+      .input {
+          padding: 0.5rem;
+          border: 1px solid #e2e8f0;
+          border-radius: 0.25rem;
+          flex: 1;
+      }
+
+      .input.error {
+          border-color: #ef4444;
+      }
+
+      .button {
+          padding: 0.5rem 1rem;
+          background-color: #3b82f6;
+          color: white;
+          border: none;
+          border-radius: 0.25rem;
+          cursor: pointer;
+          white-space: nowrap;
+      }
+
+      .button:disabled {
+          background-color: #93c5fd;
+          cursor: not-allowed;
+      }
+
+      .button:not(:disabled):hover {
+          background-color: #2563eb;
+      }
+
+      select.input {
+          appearance: auto;
+      }
     `,
   ],
 })
@@ -129,8 +163,6 @@ export class RouteFormComponent {
           translationKey,
         }),
       };
-
-      console.log(routeData)
       this.routeAdded.emit(routeData);
       this.routeForm.reset();
     }
