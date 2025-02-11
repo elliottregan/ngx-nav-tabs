@@ -27,11 +27,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/nav-tabs/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "tsConfig": "projects/nav-tabs/tsconfig.spec.json"
           }
         }
       }
@@ -53,9 +49,6 @@
             "outputPath": "dist/nav-tabs-demo",
             "index": "projects/nav-tabs-demo/src/index.html",
             "main": "projects/nav-tabs-demo/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "projects/nav-tabs-demo/tsconfig.app.json",
             "assets": [
               "projects/nav-tabs-demo/src/_redirects",
@@ -109,10 +102,6 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
             "tsConfig": "projects/nav-tabs-demo/tsconfig.spec.json",
             "assets": [
               "projects/nav-tabs-demo/src/favicon.ico",
