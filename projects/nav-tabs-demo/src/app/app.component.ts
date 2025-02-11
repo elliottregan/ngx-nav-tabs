@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import { NavTabsComponent } from 'nav-tabs';
 import { DynamicRoutesDemoComponent } from './components/dynamic-routes-demo/dynamic-routes-demo.component';
@@ -14,7 +13,6 @@ import {routes} from "./app.routes";
     NavTabsComponent,
     DynamicRoutesDemoComponent,
     FeatureFlagDemoComponent,
-    CommonModule,
     RouterLink,
   ],
   template: `

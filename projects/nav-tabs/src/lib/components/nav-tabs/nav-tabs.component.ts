@@ -1,15 +1,15 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {TabbableRoute, TabLabelCopy} from '../../models/tabs';
 import {isObservable, Observable, of} from 'rxjs';
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 
 const DEFAULT_TITLE = 'Page Navigation';
 
 @Component({
   selector: 'lib-nav-tabs',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, AsyncPipe, NgIf, NgForOf],
   styleUrls: ['./nav-tabs.component.scss'],
   template: `
       <nav [class]="baseClass" [attr.aria-label]="title$ | async">

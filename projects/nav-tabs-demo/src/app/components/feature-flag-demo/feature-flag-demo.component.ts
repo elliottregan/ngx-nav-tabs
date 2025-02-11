@@ -1,16 +1,16 @@
 // feature-flag-demo.component.ts
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { NavTabsComponent } from 'nav-tabs';
 import { TabbableRoute } from 'nav-tabs';
 import { RouteDataComponent } from '../route-data/route-data.component';
 import { FormsModule } from '@angular/forms';
 import {Router, RouterOutlet} from '@angular/router';
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-feature-flag-demo',
   standalone: true,
-  imports: [CommonModule, NavTabsComponent, FormsModule, RouterOutlet],
+  imports: [NavTabsComponent, FormsModule, RouterOutlet, NgForOf],
   template: `
     <section class="feature-flag-demo">
       <h2>Feature Flag Demo</h2>

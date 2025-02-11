@@ -1,12 +1,12 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import {
   ReactiveFormsModule,
-  FormBuilder,
   FormGroup,
   Validators,
+  FormControl,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import {TabTranslationKeys} from "../../models/copy";
+import {NgForOf} from "@angular/common";
 
 export interface RouteFormData {
   path: string;
@@ -18,7 +18,7 @@ export interface RouteFormData {
 @Component({
   selector: 'app-route-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [NgForOf, ReactiveFormsModule],
   template: `
       <div class="route-manager">
           <h3>Add New Route</h3>
@@ -148,12 +148,23 @@ export class RouteFormComponent {
   @Output() routeAdded = new EventEmitter<RouteFormData>();
   translationKeys = Object.values(TabTranslationKeys);
 
-  constructor(private fb: FormBuilder) {
-    this.routeForm = this.fb.group({
-      path: ['', [Validators.required, Validators.pattern(/^[a-z0-9-]+$/)]],
-      label: ['', Validators.required],
-      order: [1, Validators.required],
-      translationKey: [''],
+  constructor() {
+    this.routeForm = new FormGroup({
+      path: new FormControl('', {
+        validators: [Validators.required, Validators.pattern(/^[a-z0-9-]+$/)],
+        nonNullable: true
+      }),
+      label: new FormControl('', {
+        validators: [Validators.required],
+        nonNullable: true
+      }),
+      order: new FormControl(1, {
+        validators: [Validators.required],
+        nonNullable: true
+      }),
+      translationKey: new FormControl('', {
+        nonNullable: true
+      })
     });
   }
 

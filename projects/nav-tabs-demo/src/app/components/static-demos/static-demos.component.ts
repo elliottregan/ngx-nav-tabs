@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavTabsComponent } from 'nav-tabs';
 import { TranslationServiceStub } from '../../services/translation-service-stub.service';
@@ -8,7 +7,7 @@ import { translatedRoutes } from "../../stubs.routes";
 @Component({
     selector: 'app-static-demos',
     standalone: true,
-    imports: [CommonModule, NavTabsComponent, RouterOutlet],
+    imports: [NavTabsComponent, RouterOutlet],
     template: `
     <article class="translation-demo">
       <section>

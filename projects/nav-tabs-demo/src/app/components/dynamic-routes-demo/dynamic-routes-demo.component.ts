@@ -1,6 +1,5 @@
 // dynamic-routes-demo.component.ts
 import {Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {Router, RouterOutlet} from '@angular/router';
 import { NavTabsComponent, TabbableRoute } from 'nav-tabs';
 import { RouteFormComponent, RouteFormData } from '../route-form/route-form.component';
@@ -8,11 +7,12 @@ import { RouteDataComponent } from '../route-data/route-data.component';
 import { AppTabsCopyModel } from '../../models/copy';
 import { DynamicRoutesService } from "../../services/dynamic-routes.service";
 import {TranslationServiceStub} from "../../services/translation-service-stub.service";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-dynamic-routes-demo',
   standalone: true,
-  imports: [CommonModule, NavTabsComponent, RouteFormComponent, RouterOutlet],
+  imports: [NavTabsComponent, RouteFormComponent, RouterOutlet, NgForOf],
   template: `
     <section class="dynamic-routes-demo">
       <h2>Dynamic Routes</h2>

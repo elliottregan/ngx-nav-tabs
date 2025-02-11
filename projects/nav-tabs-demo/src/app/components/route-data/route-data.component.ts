@@ -1,11 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import {KeyValuePipe} from "@angular/common";
 
 @Component({
   selector: 'app-route-data',
   standalone: true,
-  imports: [CommonModule],
   template: `
       <div class="card">
           <div class="card-header">
@@ -41,7 +40,7 @@ import { CommonModule } from '@angular/common';
       .card {
           background: white;
           border-radius: 8px;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
           overflow: hidden;
       }
 
@@ -111,6 +110,9 @@ import { CommonModule } from '@angular/common';
           font-weight: 600;
       }
   `],
+  imports: [
+    KeyValuePipe
+  ]
 })
 export class RouteDataComponent {
   private route = inject(ActivatedRoute);
