@@ -24,12 +24,12 @@ import { translatedRoutes } from "../../stubs.routes";
         <router-outlet></router-outlet>
       </section>
 
-<!--      <section class="red-theme">-->
-<!--        <h2>Style adjustments without <code>::ng-deep</code>:</h2>-->
-<!--        <lib-nav-tabs [routes]="translatedRoutes"></lib-nav-tabs>-->
-<!--        <lib-nav-tabs [routes]="translatedRoutes" class="green-theme"></lib-nav-tabs>-->
-<!--        <lib-nav-tabs [routes]="translatedRoutes" class="blue-theme"></lib-nav-tabs>-->
-<!--      </section>-->
+      <section class="red-theme">
+        <h2>Style adjustments without <code>::ng-deep</code>:</h2>
+        <lib-nav-tabs [routes]="translatedRoutes"></lib-nav-tabs>
+        <lib-nav-tabs [routes]="translatedRoutes" class="green-theme"></lib-nav-tabs>
+        <lib-nav-tabs [routes]="translatedRoutes" class="blue-theme"></lib-nav-tabs>
+      </section>
     </article>
   `,
     styles: [`
@@ -43,20 +43,20 @@ import { translatedRoutes } from "../../stubs.routes";
       border-top: 1px solid #e2e8f0;
     }
     
-    /*.red-theme {*/
-    /*  --tab-active-text: red;*/
-    /*  --tab-text-color: salmon;*/
-    /*}*/
-    /*.green-theme {*/
-    /*  --tab-active-text: green;*/
-    /*  --tab-text-color: cadetblue;*/
-    /*}*/
-    /*.blue-theme {*/
-    /*  --tab-active-text: navy;*/
-    /*  --tab-text-color: blue;*/
-    /*  --nav-background: whitesmoke;*/
-    /*  --tab-underline-width: 4px;*/
-    /*}*/
+    .red-theme {
+      --tab-active-text: red;
+      --tab-text-color: salmon;
+    }
+    .green-theme {
+      --tab-active-text: green;
+      --tab-text-color: cadetblue;
+    }
+    .blue-theme {
+      --tab-active-text: navy;
+      --tab-text-color: blue;
+      --nav-background: whitesmoke;
+      --tab-underline-width: 4px;
+    }
     lib-nav-tabs {
       margin-bottom: 1rem;
     }
